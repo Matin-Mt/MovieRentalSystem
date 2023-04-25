@@ -3,6 +3,8 @@ package org.example;
 import java.util.Date;
 import java.util.Scanner;
 
+import static org.example.Utilities.dateReduction;
+
 public class Rental {
     Scanner scanner = new Scanner(System.in);
 
@@ -24,14 +26,8 @@ public class Rental {
     public double calculateLateFee() {
         var currentDate = new Date();
 
-        return (((currentDate.getYear() - returnDate.getYear()) * 365) +
-                ((currentDate.getMonth()) - returnDate.getMonth() * 30) +
-                (currentDate.getDate() - returnDate.getDate())) * movie.getFee();
+        return dateReduction(currentDate, returnDate) * movie.getFee();
     }
-
-
-
-
 
     public void payLateFee(Customer customer, double fee) {
         System.out.println("Payable Amount: " + fee);
@@ -56,11 +52,6 @@ public class Rental {
             }
         }
     }
-
-
-
-
-
 
     public int getId() {
         return id;
