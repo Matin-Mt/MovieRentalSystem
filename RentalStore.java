@@ -1,21 +1,24 @@
 package org.example;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Scanner;
-
-import static org.example.Utilities.dateReduction;
 
 public class RentalStore {
     Scanner scanner = new Scanner(System.in);
 
+    private long numberOfCustomers = 0;
+    private long numberOfMovies = 0;
+
     private ArrayList<Movie> movies;
     private ArrayList<Customer> customers;
+    private ArrayList<Rental> rentals = new ArrayList<>();
     private ArrayList<Customer> revokedCustomers = new ArrayList<>();
 
     RentalStore (ArrayList<Movie> movies, ArrayList<Customer> customers) {
-        this.movies = movies;
         this.customers = customers;
+        numberOfCustomers = customers.toArray().length;
+        this.movies = movies;
+        numberOfMovies = movies.toArray().length;
     }
 
     public void register (Customer customer) {
@@ -64,7 +67,7 @@ public class RentalStore {
     public void rentItem (Movie movie, Customer customer) {
         if (!customer.isSuspended()) {
             removeItem(movie);
-            Rental rental = new Rental(movie, customer);
+            rentals.add(new Rental(movie, customer));
         } else {
             System.out.println("Sorry, Your account has been suspended!" +
                     "\nYou cannot rent anything right now!");
@@ -72,36 +75,26 @@ public class RentalStore {
     }
 
     public void returnItem (Rental rental) {
-        var fee = rental.calculateLateFee();
-        rental.payLateFee(rental.getCustomer(), fee);
-        addItem(rental.getMovie());
-
         if (rental.getCustomer().isSuspended()) {
-            suspensionChecking(rental.getCustomer());
+            System.out.println("something"); ///////////////////////////////////////////
+        } else {
+            var fee = rental.calculateLateFee();
+            rental.payLateFee(rental.getCustomer(), fee);
+            addItem(rental.getMovie());
+            rentals.remove(rental);
         }
     }
 
-    private void suspensionChecking(Customer customer) {
-        if (customer.isSuspended()) {
-            if (dateReduction(new Date(), customer.getDeadline()) >= 0) {
-                System.out.println("Your account is suspended!");
-                System.out.print("Do you want to pay your fee? (Y/N) ");
-                var answer = scanner.nextLine().toLowerCase().trim();
+    public ArrayList<Rental> getRentals () {
+        return rentals;
+    }
 
-                if (answer.equals("y") && customer.getFund() >= customer.getPayment()) {
-                    customer.addFund((-1) * customer.getPayment());
-                    customer.setSuspended(false);
+    public long getNumberOfCustomers() {
+        return numberOfCustomers;
+    }
 
-                } else if (!answer.equals("y")) {
-                    System.out.println("Sorry, You don't have enough money!");
-                }
-
-            } else {
-                revokedCustomers.add(customer);
-                customers.remove(customer);
-                System.out.println("Sorry but your account has been revoked!");
-            }
-        }
+    public long getNumberOfMovies() {
+        return numberOfMovies;
     }
 
 }

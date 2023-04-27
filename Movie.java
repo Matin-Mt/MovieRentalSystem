@@ -14,8 +14,8 @@ public class Movie {
     private boolean isAvailable;
     private double fee;
 
-    public Movie(String title, String genre, String director, ArrayList<String> cast,
-                 Date releaseDate, double Fee) {
+    public Movie(String title, String genre, String director,
+                 ArrayList<String> cast, Date releaseDate, double Fee) {
         this.id = counter++;
         this.title = title;
         this.genre = genre;
@@ -23,6 +23,11 @@ public class Movie {
         this.cast = new ArrayList<>(cast);
         this.releaseDate = releaseDate;
         this.fee = Fee;
+    }
+
+    public Movie(String title, String genre, String director,
+                 ArrayList<String> cast, Date releaseDate) {
+        this(title, genre, director, cast, releaseDate, 0);
     }
 
     public double getFee() {

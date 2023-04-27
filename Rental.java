@@ -9,14 +9,13 @@ public class Rental {
     Scanner scanner = new Scanner(System.in);
 
     private int id;
-    private int counter = 1;
     private Movie movie;
     private Customer customer;
     private Date rentalDate;
     private Date returnDate;
 
     public Rental(Movie movie, Customer customer) {
-        this.id = counter++;
+        this.id = Integer.parseInt(Integer.toString(movie.getId()).concat(Integer.toString(customer.getId())));
         this.movie = movie;
         this.customer = customer;
         setRentalDate();
@@ -39,7 +38,7 @@ public class Rental {
                 System.out.println("Sorry, You don't have enough money!" +
                         "\nYou'll have to pay the fee within 3 days otherwise your membership will be revoked!");
                 ////////////////////////////////////////////
-                customer.setPayment(fee);
+                customer.setLateFee(fee);
 
                 var date = new Date();
                 date.setDate(date.getDate() + 3); // update suspended Members every time date has been updated
@@ -80,5 +79,6 @@ public class Rental {
     private void setReturnDate() {
         returnDate = new Date(rentalDate.getYear(), rentalDate.getMonth(), rentalDate.getDate() + 4);
     }
+
 }
 

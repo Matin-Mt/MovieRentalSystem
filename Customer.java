@@ -12,20 +12,10 @@ public class Customer {
     private String address;
     private ArrayList<Rental> rentals;
 
-
     private double fund = 0;
-    private double payment = 0;
+    private double lateFee = 0;
     private Date deadline;
     private boolean isSuspended = false;
-
-
-    public Customer (String name) {
-        this(name, null, null, null);
-    }
-
-    public Customer (String name, String phone) {
-        this(name, null, phone, null);
-    }
 
     public Customer (String name, String phone, String address) {
         this(name, null, phone, address);
@@ -48,12 +38,12 @@ public class Customer {
         return fund;
     }
 
-    public void setPayment (double payment) {
-        this.payment = payment;
+    public void setLateFee(double lateFee) {
+        this.lateFee = lateFee;
     }
 
-    public double getPayment () {
-        return payment;
+    public double getLateFee() {
+        return lateFee;
     }
 
     public int getId() {
