@@ -9,14 +9,14 @@ public class Rental {
     Scanner scanner = new Scanner(System.in);
 
     private int id;
-    private Movie movie;
+    private Item item;
     private Customer customer;
     private Date rentalDate;
     private Date returnDate;
 
-    public Rental(Movie movie, Customer customer) {
-        this.id = Integer.parseInt(Integer.toString(movie.getId()).concat(Integer.toString(customer.getId())));
-        this.movie = movie;
+    public Rental(Item item, Customer customer) {
+        this.id = Integer.parseInt(Integer.toString(item.getId()).concat(Integer.toString(customer.getId())));
+        this.item = item;
         this.customer = customer;
         setRentalDate();
         setReturnDate();
@@ -25,7 +25,7 @@ public class Rental {
     public double calculateLateFee() {
         var currentDate = new Date();
 
-        return dateReduction(currentDate, returnDate) * movie.getFee();
+        return dateReduction(currentDate, returnDate) * item.getFee();
     }
 
     public void payLateFee(Customer customer, double fee) {
@@ -56,8 +56,8 @@ public class Rental {
         return id;
     }
 
-    public Movie getMovie() {
-        return movie;
+    public Item getItem() {
+        return item;
     }
 
     public Customer getCustomer() {

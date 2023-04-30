@@ -1,6 +1,5 @@
 package org.example;
 
-import java.util.ArrayList;
 import java.util.Date;
 
 public class Item {
@@ -9,18 +8,20 @@ public class Item {
     private String title;
     private Date releaseDate;
     private boolean isAvailable;
+    private String genre;
     private double fee;
 
-    public Item(String title, Date releaseDate, double fee) {
+    public Item(String title, String genre, Date releaseDate, double fee) {
         this.id = counter++;
         this.title = title;
+        this.genre = genre;
         this.releaseDate = releaseDate;
         this.fee = fee;
         isAvailable = true;
     }
 
-    public Item(String title, Date releaseDate) {
-        this(title, releaseDate, 0);
+    public Item(String title, String genre, Date releaseDate) {
+        this(title, genre, releaseDate, 0);
     }
 
     public int getId() {
@@ -50,4 +51,9 @@ public class Item {
     public void setAvailable (boolean isAvailable) {
         this.isAvailable = isAvailable;
     }
+
+    public String getGenre() {
+        return genre;
+    }
+
 }

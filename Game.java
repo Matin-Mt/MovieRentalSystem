@@ -8,8 +8,7 @@ public class Game extends Item {
     private String company;
 
     public Game(String title, String genre, String creator, String company, Date releaseDate, double fee) {
-        super(title, releaseDate, fee);
-        this.genre = genre;
+        super(title, genre, releaseDate, fee);
         this.creator = creator;
         this.company = company;
     }
@@ -20,10 +19,6 @@ public class Game extends Item {
 
     public Game(String title, String genre, Date releaseDate) {
         this(title, genre, "Unknown", "Unknown", releaseDate, 0);
-    }
-
-    public String getGenre() {
-        return genre;
     }
 
     public String getCreator() {

@@ -7,18 +7,18 @@ public class RentalStore {
     Scanner scanner = new Scanner(System.in);
 
     private long numberOfCustomers = 0;
-    private long numberOfMovies = 0;
+    private long numberOfItems = 0;
 
-    private ArrayList<Movie> movies;
+    private ArrayList<Item> items;
     private ArrayList<Customer> customers;
     private ArrayList<Rental> rentals = new ArrayList<>();
     private ArrayList<Customer> revokedCustomers = new ArrayList<>();
 
-    RentalStore (ArrayList<Movie> movies, ArrayList<Customer> customers) {
+    RentalStore (ArrayList<Item> items, ArrayList<Customer> customers) {
         this.customers = customers;
         numberOfCustomers = customers.toArray().length;
-        this.movies = movies;
-        numberOfMovies = movies.toArray().length;
+        this.items = items;
+        numberOfItems = items.toArray().length;
     }
 
     public void register (Customer customer) {
@@ -26,9 +26,9 @@ public class RentalStore {
         revokedCustomers.remove(customer);
     }
 
-    public ArrayList<Movie> getAvailableItems () {
-        ArrayList<Movie> availableItems = new ArrayList<>();
-        for (var i: movies) {
+    public ArrayList<Item> getAvailableItems () {
+        ArrayList<Item> availableItems = new ArrayList<>();
+        for (var i: items) {
             if (i.isAvailable()) {
                 availableItems.add(i);
             }
@@ -45,8 +45,8 @@ public class RentalStore {
         return null;
     }
 
-    public Movie getItemById (int id) {
-        for (var m: movies) {
+    public Item getItemById (int id) {
+        for (var m: items) {
             if (m.getId() == id) {
                 return m;
             }
@@ -54,20 +54,20 @@ public class RentalStore {
         return null;
     }
 
-    private void addItem(Movie movie) {
-        movies.add(movie); // add a movie to the list off available movies
-        movie.setAvailable(true);
+    private void addItem(Item item) {
+        items.add(item); // add a movie to the list off available movies
+        item.setAvailable(true);
     }
 
-    private void removeItem(Movie movie) {
-        movies.remove(movie); // remove a movie from the list of available movies
-        movie.setAvailable(false);
+    private void removeItem(Item item) {
+        items.remove(item); // remove a movie from the list of available movies
+        item.setAvailable(false);
     }
 
-    public void rentItem (Movie movie, Customer customer) {
+    public void rentItem (Item item, Customer customer) {
         if (!customer.isSuspended()) {
-            removeItem(movie);
-            rentals.add(new Rental(movie, customer));
+            removeItem(item);
+            rentals.add(new Rental(item, customer));
         } else {
             System.out.println("Sorry, Your account has been suspended!" +
                     "\nYou cannot rent anything right now!");
@@ -80,7 +80,7 @@ public class RentalStore {
         } else {
             var fee = rental.calculateLateFee();
             rental.payLateFee(rental.getCustomer(), fee);
-            addItem(rental.getMovie());
+            addItem(rental.getItem());
             rentals.remove(rental);
         }
     }
@@ -93,8 +93,8 @@ public class RentalStore {
         return numberOfCustomers;
     }
 
-    public long getNumberOfMovies() {
-        return numberOfMovies;
+    public long getNumberOfItems() {
+        return numberOfItems;
     }
 
 }

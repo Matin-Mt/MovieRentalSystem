@@ -4,12 +4,10 @@ import java.util.Date;
 
 public class Book extends Item {
     private String author;
-    private String genre;
 
     public Book(String title, String author, String genre, Date releaseDate, double fee) {
-        super(title, releaseDate, fee);
+        super(title, genre, releaseDate, fee);
         this.author = author;
-        this.genre = genre;
     }
 
     public Book(String title, String author, String genre, Date releaseDate) {
@@ -18,9 +16,5 @@ public class Book extends Item {
 
     public String getAuthor() {
         return author;
-    }
-
-    public String getGenre() {
-        return genre;
     }
 }
