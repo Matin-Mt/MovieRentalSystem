@@ -1,88 +1,70 @@
 package org.example;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 public class Customer {
     private int id;
-    private int counter = 1;
     private String name;
     private String email;
     private String phone;
     private String address;
     private ArrayList<Rental> rentals;
 
-    private double fund = 0;
-    private double lateFee = 0;
-    private Date deadline;
-    private boolean isSuspended = false;
-
-    public Customer (String name, String phone, String address) {
-        this(name, null, phone, address);
-    }
-
-    public Customer(String name, String email, String phone, String address) {
-        id = counter++;
+    public Customer(int id, String name, String email, String phone, String address,
+                    ArrayList<Rental> rentals) {
+        this.id = id;
         this.name = name;
         this.email = email;
         this.phone = phone;
         this.address = address;
-        rentals = new ArrayList<>();
-    }
-
-    public void addFund (double fund) {
-        this.fund += fund;
-    }
-
-    public double getFund () {
-        return fund;
-    }
-
-    public void setLateFee(double lateFee) {
-        this.lateFee = lateFee;
-    }
-
-    public double getLateFee() {
-        return lateFee;
+        this.rentals = rentals;
     }
 
     public int getId() {
         return id;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getName() {
         return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getEmail() {
         return email;
     }
 
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public String getPhone() {
         return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public String getAddress() {
         return address;
     }
 
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
     public ArrayList<Rental> getRentals() {
         return rentals;
     }
 
-    public Date getDeadline() {
-        return deadline;
-    }
-
-    public void setDeadline (Date deadline) {
-        this.deadline = deadline;
-    }
-
-    public boolean isSuspended() {
-        return isSuspended;
-    }
-
-    public void setSuspended(boolean suspended) {
-        isSuspended = suspended;
+    public void setRentals(ArrayList<Rental> rentals) {
+        this.rentals = rentals;
     }
 }

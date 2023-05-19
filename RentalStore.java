@@ -1,18 +1,14 @@
 package org.example;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class RentalStore {
-    Scanner scanner = new Scanner(System.in);
-
     private long numberOfCustomers = 0;
     private long numberOfItems = 0;
 
     private ArrayList<Item> items;
     private ArrayList<Customer> customers;
     private ArrayList<Rental> rentals = new ArrayList<>();
-    private ArrayList<Customer> revokedCustomers = new ArrayList<>();
 
     RentalStore (ArrayList<Item> items, ArrayList<Customer> customers) {
         this.customers = customers;
@@ -22,8 +18,7 @@ public class RentalStore {
     }
 
     public void register (Customer customer) {
-        customers.add(customer); // register a new customer
-        revokedCustomers.remove(customer);
+        customers.add(customer);
     }
 
     public ArrayList<Item> getAvailableItems () {
@@ -65,24 +60,12 @@ public class RentalStore {
     }
 
     public void rentItem (Item item, Customer customer) {
-        if (!customer.isSuspended()) {
-            removeItem(item);
-            rentals.add(new Rental(item, customer));
-        } else {
-            System.out.println("Sorry, Your account has been suspended!" +
-                    "\nYou cannot rent anything right now!");
-        }
+        rentals.add(new Rental(item, customer));
     }
 
     public void returnItem (Rental rental) {
-        if (rental.getCustomer().isSuspended()) {
-            System.out.println("something"); ///////////////////////////////////////////
-        } else {
-            var fee = rental.calculateLateFee();
-            rental.payLateFee(rental.getCustomer(), fee);
-            addItem(rental.getItem());
-            rentals.remove(rental);
-        }
+        addItem(rental.getItem());
+        rentals.remove(rental);
     }
 
     public ArrayList<Rental> getRentals () {

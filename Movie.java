@@ -1,33 +1,32 @@
 package org.example;
 
-import org.example.Item;
-
-import java.util.ArrayList;
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Movie extends Item {
     private String director;
-    private ArrayList<String> cast;
+    private String cast;
 
-    public Movie(String title, String genre, String director,
-                 ArrayList<String> cast, Date releaseDate, double fee) {
-        super(title, genre, releaseDate, fee);
+    public Movie(long id, String title, String genre, LocalDate releaseDate, boolean isAvailable,
+                 String director, String cast) {
+        super(id, title, genre, releaseDate, isAvailable);
         this.director = director;
-        this.cast = new ArrayList<>(cast);
-    }
-
-    public Movie(String title, String genre, String director,
-                 ArrayList<String> cast, Date releaseDate) {
-        this(title, genre, director, cast, releaseDate, 0);
+        this.cast = cast;
     }
 
     public String getDirector() {
         return director;
     }
 
-    public ArrayList<String> getCast() {
+    public void setDirector(String director) {
+        this.director = director;
+    }
+
+    public String getCast() {
         return cast;
     }
 
+    public void setCast(String cast) {
+        this.cast = cast;
+    }
 }
 

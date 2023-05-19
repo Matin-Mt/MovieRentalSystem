@@ -1,59 +1,59 @@
 package org.example;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Item {
-    private int id;
-    private int counter = 1;
-    private String title;
-    private Date releaseDate;
-    private boolean isAvailable;
-    private String genre;
-    private double fee;
+    protected long id;
+    protected String title;
+    protected String genre;
+    protected LocalDate releaseDate;
+    protected boolean isAvailable;
 
-    public Item(String title, String genre, Date releaseDate, double fee) {
-        this.id = counter++;
+    public Item(long id, String title, String genre, LocalDate releaseDate, boolean isAvailable) {
+        this.id = id;
         this.title = title;
         this.genre = genre;
         this.releaseDate = releaseDate;
-        this.fee = fee;
-        isAvailable = true;
+        this.isAvailable = isAvailable;
     }
 
-    public Item(String title, String genre, Date releaseDate) {
-        this(title, genre, releaseDate, 0);
-    }
-
-    public int getId() {
+    public long getId() {
         return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getTitle() {
         return title;
     }
 
-    public Date getReleaseDate() {
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public LocalDate getReleaseDate() {
         return releaseDate;
     }
 
-    public double getFee() {
-        return fee;
-    }
-
-    public void setFee(double fee) {
-        this.fee = fee;
+    public void setReleaseDate(LocalDate releaseDate) {
+        this.releaseDate = releaseDate;
     }
 
     public boolean isAvailable() {
         return isAvailable;
     }
 
-    public void setAvailable (boolean isAvailable) {
-        this.isAvailable = isAvailable;
+    public void setAvailable(boolean available) {
+        isAvailable = available;
     }
 
     public String getGenre() {
         return genre;
     }
 
+    public void setGenre(String genre) {
+        this.genre = genre;
+    }
 }

@@ -1,20 +1,41 @@
 package org.example;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Book extends Item {
-    private String author;
+    private String writer;
+    private String publisher;
+    private String bookCover;
 
-    public Book(String title, String author, String genre, Date releaseDate, double fee) {
-        super(title, genre, releaseDate, fee);
-        this.author = author;
+    public Book(long id, String title, String genre, LocalDate releaseDate, boolean isAvailable,
+                String writer, String publisher, String bookCover) {
+        super(id, title, genre, releaseDate, isAvailable);
+        this.writer = writer;
+        this.publisher = publisher;
+        this.bookCover = bookCover;
     }
 
-    public Book(String title, String author, String genre, Date releaseDate) {
-        this(title, author, genre, releaseDate, 0);
+    public String getWriter() {
+        return writer;
     }
 
-    public String getAuthor() {
-        return author;
+    public void setWriter(String writer) {
+        this.writer = writer;
+    }
+
+    public String getPublisher() {
+        return publisher;
+    }
+
+    public void setPublisher(String publisher) {
+        this.publisher = publisher;
+    }
+
+    public String getBookCover() {
+        return bookCover;
+    }
+
+    public void setBookCover(String bookCover) {
+        this.bookCover = bookCover;
     }
 }

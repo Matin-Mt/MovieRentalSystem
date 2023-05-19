@@ -1,84 +1,70 @@
 package org.example;
 
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Date;
-import java.util.Scanner;
-
-import static org.example.Utilities.dateReduction;
 
 public class Rental {
-    Scanner scanner = new Scanner(System.in);
-
-    private int id;
+    private long id;
+    private static long counter = 1;
     private Item item;
     private Customer customer;
-    private Date rentalDate;
-    private Date returnDate;
+    private LocalDate rentalDate;
+    private LocalDate returnDate;
 
     public Rental(Item item, Customer customer) {
-        this.id = Integer.parseInt(Integer.toString(item.getId()).concat(Integer.toString(customer.getId())));
+        this.id = counter++;
         this.item = item;
         this.customer = customer;
-        setRentalDate();
-        setReturnDate();
+        rentalDate = dateConvertor();
+        setRentalDate(rentalDate.plusDays(4));
     }
 
-    public double calculateLateFee() {
-        var currentDate = new Date();
-
-        return dateReduction(currentDate, returnDate) * item.getFee();
+    private LocalDate dateConvertor() {
+        Instant instant = new Date().toInstant();
+        ZoneId zoneId = ZoneId.systemDefault();
+        return instant.atZone(zoneId).toLocalDate();
     }
 
-    public void payLateFee(Customer customer, double fee) {
-        System.out.println("Payable Amount: " + fee);
-        System.out.print("\nDo you want to pay? (Y/N) ");
-        var answer = scanner.next().toLowerCase().trim();
-
-        if (answer.equals("y") || answer.equals("yes") ) {
-            if (customer.getFund() < fee) {
-                System.out.println("Sorry, You don't have enough money!" +
-                        "\nYou'll have to pay the fee within 3 days otherwise your membership will be revoked!");
-                ////////////////////////////////////////////
-                customer.setLateFee(fee);
-
-                var date = new Date();
-                date.setDate(date.getDate() + 3); // update suspended Members every time date has been updated
-                customer.setDeadline(date);
-                customer.setSuspended(true);
-                ////////////////////////////////////////////
-            } else {
-                customer.addFund((-1) * fee);
-                System.out.println("Thanks for your payment!");
-            }
-        }
-    }
-
-    public int getId() {
+    public long getId() {
         return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public Item getItem() {
         return item;
     }
 
+    public void setItem(Item item) {
+        this.item = item;
+    }
+
     public Customer getCustomer() {
         return customer;
     }
 
-    public Date getRentalDate() {
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+    public LocalDate getRentalDate() {
         return rentalDate;
     }
 
-    private void setRentalDate() {
-        rentalDate = new Date();
+    public void setRentalDate(LocalDate rentalDate) {
+        this.rentalDate = rentalDate;
     }
 
-    public Date getReturnDate() {
+    public LocalDate getReturnDate() {
         return returnDate;
     }
 
-    private void setReturnDate() {
-        returnDate = new Date(rentalDate.getYear(), rentalDate.getMonth(), rentalDate.getDate() + 4);
+    public void setReturnDate(LocalDate returnDate) {
+        this.returnDate = returnDate;
     }
-
 }
 

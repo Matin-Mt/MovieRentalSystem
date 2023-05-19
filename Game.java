@@ -1,31 +1,51 @@
 package org.example;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Game extends Item {
-    private String genre;
-    private String creator;
-    private String company;
+    private String director;
+    private double gameRate;
+    private String aboutGame;
+    private String manufacturer;
 
-    public Game(String title, String genre, String creator, String company, Date releaseDate, double fee) {
-        super(title, genre, releaseDate, fee);
-        this.creator = creator;
-        this.company = company;
+    public Game(long id, String title, String genre, LocalDate releaseDate, boolean isAvailable,
+                String director, double gameRate, String aboutGame, String manufacturer) {
+        super(id, title, genre, releaseDate, isAvailable);
+        this.director = director;
+        this.gameRate = gameRate;
+        this.aboutGame = aboutGame;
+        this.manufacturer = manufacturer;
     }
 
-    public Game(String title, String genre, String creator, String company, Date releaseDate) {
-        this(title, genre, creator, company, releaseDate, 0);
+    public String getDirector() {
+        return director;
     }
 
-    public Game(String title, String genre, Date releaseDate) {
-        this(title, genre, "Unknown", "Unknown", releaseDate, 0);
+    public void setDirector(String director) {
+        this.director = director;
     }
 
-    public String getCreator() {
-        return creator;
+    public double getGameRate() {
+        return gameRate;
     }
 
-    public String getCompany() {
-        return company;
+    public void setGameRate(double gameRate) {
+        this.gameRate = gameRate;
+    }
+
+    public String getAboutGame() {
+        return aboutGame;
+    }
+
+    public void setAboutGame(String aboutGame) {
+        this.aboutGame = aboutGame;
+    }
+
+    public String getManufacturer() {
+        return manufacturer;
+    }
+
+    public void setManufacturer(String manufacturer) {
+        this.manufacturer = manufacturer;
     }
 }
