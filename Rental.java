@@ -17,11 +17,11 @@ public class Rental {
         this.id = counter++;
         this.item = item;
         this.customer = customer;
-        rentalDate = dateConvertor();
-        setRentalDate(rentalDate.plusDays(4));
+        rentalDate = DateToLocalDate();
+        returnDate = rentalDate.plusDays(4);
     }
 
-    private LocalDate dateConvertor() {
+    private LocalDate DateToLocalDate() {
         Instant instant = new Date().toInstant();
         ZoneId zoneId = ZoneId.systemDefault();
         return instant.atZone(zoneId).toLocalDate();

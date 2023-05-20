@@ -20,6 +20,12 @@ public class Customer {
         this.rentals = rentals;
     }
 
+    public void addRental(Rental rental) {
+        if (this.rentals == null)
+            this.rentals = new ArrayList<>();
+        this.rentals.add(rental);
+    }
+
     public int getId() {
         return id;
     }
