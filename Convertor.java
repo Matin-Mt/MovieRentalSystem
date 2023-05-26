@@ -72,7 +72,7 @@ public class Convertor {
                 }).create();
 
         try(Writer writer = new FileWriter(file)) {
-            gson.toJson(rentals, writer);
+             gson.toJson(rentals, writer);
 
         } catch (Exception e) {
             e.printStackTrace();

@@ -14,6 +14,7 @@ public class RentalStore <K extends Item> {
 
     public void register (Customer customer) {
         customers.add(customer);
+        Main.customers.add(customer);
     }
 
     public ArrayList<Item> getAvailableItems () {
